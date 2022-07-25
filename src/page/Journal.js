@@ -5,7 +5,11 @@ import axios from "axios";
 const Journal = () => {
   const [data, setData] = useState([
     {},
-    {}
+    {},
+    {},
+    {},
+    
+
   ]);
 
   const addMore = () => {
@@ -24,10 +28,11 @@ const Journal = () => {
     const debit = sumData('debit')
     const credit = sumData('credit')
     if (debit != credit) {
-      alert("not match")
+      alert("Something's not quite right")
       return;
     } else {
       axios.post("/CreateJournal", { infodata: data }).then((data) => {
+        alert("Journal Entry Saved")
       }).catch((err) => {
         console.log(err)
       })
@@ -350,7 +355,6 @@ function RowComponent({ index, data, setData }) {
       </td>
       <td>
         <input
-          placeholder="Debit"
           value={data[index].debit}
           onChange={(e) => changeText(e.target.value, "debit")}
           disabled={data[index]?.credit ? true : false}
@@ -365,7 +369,6 @@ function RowComponent({ index, data, setData }) {
       </td>
       <td>
         <input
-          placeholder="Credit"
           value={data[index].credit}
           onChange={(e) => changeText(e.target.value, "credit")}
           disabled={data[index]?.debit ? true : false}
@@ -380,7 +383,6 @@ function RowComponent({ index, data, setData }) {
       </td>
       <td>
         <input
-          placeholder="description"
           value={data[index].description}
           onChange={(e) => changeText(e.target.value, "description")}
           style={{
@@ -394,8 +396,7 @@ function RowComponent({ index, data, setData }) {
       </td>
       <td>
         <input
-          placeholder="Tax"
-          value={data[index].text}
+          value={data[index].Tax}
           onChange={(e) => changeText(e.target.value, "Tax")}
           style={{
             border: '1px solid #ccc',
@@ -408,7 +409,6 @@ function RowComponent({ index, data, setData }) {
       </td>
       <td>
         <input
-          placeholder="Employee"
           value={data[index].Employee}
           onChange={(e) => changeText(e.target.value, "Employee")}
           style={{
